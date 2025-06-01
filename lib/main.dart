@@ -142,7 +142,7 @@ class BordjApp extends StatelessWidget {
             ),
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 2,
           shadowColor: darkColorScheme.shadow.withAlpha(128),
           shape: RoundedRectangleBorder(

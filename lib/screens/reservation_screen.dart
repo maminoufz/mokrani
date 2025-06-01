@@ -68,7 +68,7 @@ class _ReservationPageState extends State<ReservationPage> {
               style: TextButton.styleFrom(foregroundColor: accentColor),
             ),
             // Using DialogTheme instead of deprecated dialogBackgroundColor
-            dialogTheme: DialogTheme(backgroundColor: surfaceColor),
+            dialogTheme: DialogThemeData(backgroundColor: surfaceColor),
           ),
           child: child!,
         );
