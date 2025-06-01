@@ -29,16 +29,15 @@ To use the interactive map feature in the Turathna app, you need to set up a Goo
 
 ### Step 3: Configure iOS (if building for iOS)
 
-1. Open `ios/Runner/AppDelegate.swift`
-2. Add the following import at the top:
-```swift
-import GoogleMaps
-```
+**✅ iOS configuration is already completed! Just replace the API key.**
 
-3. Add this line in the `application` method:
+1. Open `ios/Runner/AppDelegate.swift`
+2. Replace `YOUR_GOOGLE_MAPS_API_KEY_HERE` with your actual API key:
 ```swift
 GMSServices.provideAPIKey("YOUR_ACTUAL_API_KEY_HERE")
 ```
+
+**Note:** The iOS deployment target has been updated to iOS 14.0 to support Google Maps Flutter plugin, and location permissions have been added to Info.plist.
 
 ### Step 4: Test the Map
 
