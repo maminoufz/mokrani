@@ -84,9 +84,12 @@ flutter:
     - assets/images/bordj3.jpg
     - assets/images/bordj4.jpg
     - assets/images/bordj5.jpg
+    - assets/images/page1.jpg
     - assets/lang/en.json
     - assets/lang/fr.json
     - assets/lang/ar.json
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

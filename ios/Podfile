@@ -1,5 +1,4 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '14.0'
+platform :ios, '12.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -32,32 +31,19 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-  target 'RunnerTests' do
-    inherit! :search_paths
-  end
+  
+  # Add this line to fix video_player issues
+  pod 'video_player_avfoundation', :git => 'https://github.com/flutter/plugins.git', :path => 'packages/video_player/video_player_avfoundation'
 end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
-
-    # Set minimum deployment target for all pods
+    
+    # Add these lines to fix the arm64 architecture issue
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-
-      # Remove unsupported compiler flags
-      config.build_settings['OTHER_CFLAGS'] = (config.build_settings['OTHER_CFLAGS'] || []).reject { |flag| flag == '-G' }
-      config.build_settings['OTHER_CPPFLAGS'] = (config.build_settings['OTHER_CPPFLAGS'] || []).reject { |flag| flag == '-G' }
-
-      # Ensure compatibility with newer Xcode versions
-      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'i386'
-      config.build_settings['EXCLUDED_ARCHS[sdk=iphoneos*]'] = 'armv7'
-
-      # Fix potential Swift version issues
-      config.build_settings['SWIFT_VERSION'] = '5.0'
-
-      # Disable bitcode (deprecated in Xcode 14+)
-      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
     end
   end
 end

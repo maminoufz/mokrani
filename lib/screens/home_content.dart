@@ -4,6 +4,7 @@ import '../widgets/custom_carousel.dart';
 import '../extensions/string_extensions.dart';
 import 'chat_screen.dart';
 import '../widgets/youtube_video_player.dart';
+import '../widgets/custom_video_player.dart';
 
 class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
@@ -16,12 +17,11 @@ class _HomeContentState extends State<HomeContent> {
   int _currentImageIndex = 0;
 
   // Sample image list - replace with your actual fortress images
-  final List<String> _imageList = [
-    'assets/images/bordj1.jpg',
-    'assets/images/bordj2.jpg',
-    'assets/images/bordj4.jpg',
-    'assets/images/bordj5.jpg',
+ final List<String> _videoList = [
+    'https://firebasestorage.googleapis.com/v0/b/webapp-ce0ce.appspot.com/o/video%2FIMG_0850.MP4?alt=media&token=61ecbe19-e1b2-48a0-9719-f1044cf6d286',
+    'https://firebasestorage.googleapis.com/v0/b/webapp-ce0ce.appspot.com/o/video%2FIMG_0851.MP4?alt=media&token=0615e646-c09e-4b55-aa22-343e5a1882ca'
   ];
+
 
   // YouTube video URL
   final String _youtubeVideoUrl = 'https://youtu.be/rSoI0PogeCU?si=ZPGTeP45ItR8h7ZP';
@@ -67,11 +67,12 @@ class _HomeContentState extends State<HomeContent> {
                                 _currentImageIndex = index;
                               });
                             },
-                            items: _imageList.map((imagePath) {
-                              return Image.asset(
-                                imagePath,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
+                            items: _videoList.map((videoUrl) {
+                              return CustomVideoPlayer(
+                                videoUrl: videoUrl,
+                                aspectRatio: 16 / 9,
+                                autoPlay: false,
+                                showControls: true,
                               );
                             }).toList(),
                           ),
@@ -131,7 +132,7 @@ class _HomeContentState extends State<HomeContent> {
                             right: 16,
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
-                              children: _imageList.asMap().entries.map((entry) {
+                              children: _videoList.asMap().entries.map((entry) {
                                 return Container(
                                   width: 6,
                                   height: 6,

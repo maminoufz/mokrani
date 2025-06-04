@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 // Import your screens
+import 'screens/splash_screen.dart';
 import 'screens/home_screen_fixed.dart';
 import 'screens/history_screen.dart';
 import 'screens/gallery_screen.dart';
@@ -269,7 +270,7 @@ class BordjApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }
