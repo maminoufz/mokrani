@@ -3,7 +3,7 @@ workflows:
     name: iOS Build Turathna
     environment:
       flutter: stable
-      xcode: latest
+      xcode: 15.0
       cocoapods: default
       vars:
         XCODE_WORKSPACE: "ios/Runner.xcworkspace"
