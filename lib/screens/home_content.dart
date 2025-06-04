@@ -17,11 +17,10 @@ class _HomeContentState extends State<HomeContent> {
   int _currentImageIndex = 0;
 
   // Sample image list - replace with your actual fortress images
- final List<String> _videoList = [
+  final List<String> _videoList = [
     'https://firebasestorage.googleapis.com/v0/b/webapp-ce0ce.appspot.com/o/video%2FIMG_0850.MP4?alt=media&token=61ecbe19-e1b2-48a0-9719-f1044cf6d286',
     'https://firebasestorage.googleapis.com/v0/b/webapp-ce0ce.appspot.com/o/video%2FIMG_0851.MP4?alt=media&token=0615e646-c09e-4b55-aa22-343e5a1882ca'
   ];
-
 
   // YouTube video URL
   final String _youtubeVideoUrl = 'https://youtu.be/rSoI0PogeCU?si=ZPGTeP45ItR8h7ZP';
@@ -543,8 +542,6 @@ class _HomeContentState extends State<HomeContent> {
       ],
     );
   }
-
-
 }
 
 
