@@ -1,0 +1,48 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      codemagic:
+        distribution_type: ad-hoc
+    environment:
+      ios_signing:
+        distribution_type: ad-hoc
+        bundle_identifier: com.example.app
+      xcode: latest
+      cocoapods: default
+      node: v16.13.0
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Podfile check and setup
+        script: |
+          if [ ! -f "ios/Podfile" ]; then
+            echo "Podfile not found, creating it..."
+            cd ios
+            pod init
+            # Update Podfile with iOS 13.0
+            sed -i '' 's/platform :ios, .*/platform :ios, '"'"'13.0'"'"'/' Podfile
+            # Add use_frameworks!
+            sed -i '' '/target '"'"'Runner'"'"' do/a\\
+            use_frameworks!\\
+            use_modular_headers!' Podfile
+          fi
+      - name: Install pods
+        script: |
+          cd ios
+          pod install
+      - name: Build iOS
+        script: |
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      email:
+        recipients:
+          - user@example.com 
