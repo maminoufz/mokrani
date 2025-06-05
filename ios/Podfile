@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '13.0'
+platform :ios, '14.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -92,6 +92,9 @@ post_install do |installer|
         ## dart: PermissionGroup.criticalAlerts
         # 'PERMISSION_CRITICAL_ALERTS=1'
       ]
+
+      # Ensure iOS deployment target is set to 14.0 for all pods
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
     end
     # End of the permission_handler configuration
   end

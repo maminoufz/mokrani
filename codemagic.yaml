@@ -23,17 +23,22 @@ workflows:
             echo "Podfile not found, creating it..."
             cd ios
             pod init
-            # Update Podfile with iOS 13.0
-            sed -i '' 's/platform :ios, .*/platform :ios, '"'"'13.0'"'"'/' Podfile
+            # Update Podfile with iOS 14.0
+            sed -i '' 's/platform :ios, .*/platform :ios, '"'"'14.0'"'"'/' Podfile
             # Add use_frameworks!
             sed -i '' '/target '"'"'Runner'"'"' do/a\\
             use_frameworks!\\
             use_modular_headers!' Podfile
           fi
+      - name: Clean pods
+        script: |
+          cd ios
+          rm -rf Pods
+          rm -rf Podfile.lock
       - name: Install pods
         script: |
           cd ios
-          pod install
+          pod install --repo-update
       - name: Build iOS
         script: |
           flutter build ios --release --no-codesign
