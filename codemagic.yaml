@@ -12,34 +12,8 @@ workflows:
         bundle_identifier: com.example.app
       xcode: latest
       cocoapods: default
-      node: v16.13.0
     scripts:
-      - name: Get Flutter packages
-        script: |
-          flutter packages pub get
-      - name: Podfile check and setup
-        script: |
-          if [ ! -f "ios/Podfile" ]; then
-            echo "Podfile not found, creating it..."
-            cd ios
-            pod init
-            # Update Podfile with iOS 14.0
-            sed -i '' 's/platform :ios, .*/platform :ios, '"'"'14.0'"'"'/' Podfile
-            # Add use_frameworks!
-            sed -i '' '/target '"'"'Runner'"'"' do/a\\
-            use_frameworks!\\
-            use_modular_headers!' Podfile
-          fi
-      - name: Clean pods
-        script: |
-          cd ios
-          rm -rf Pods
-          rm -rf Podfile.lock
-      - name: Install pods
-        script: |
-          cd ios
-          pod install --repo-update
-      - name: Build iOS
+      - name: Build IPA
         script: |
           flutter build ipa --release
     artifacts:
