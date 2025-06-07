@@ -30,4 +30,38 @@ workflows:
           - user@example.com
       app_store_connect:
         submit_for_review: false
-        beta_groups: [] 
+        beta_groups: []
+
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    instance_type: linux
+    environment:
+      android_signing:
+        keystore_reference: android_keystore
+      flutter: stable
+      groups:
+        - google_credentials
+    scripts:
+      - name: Clean project
+        script: |
+          flutter clean
+          cd android
+          ./gradlew clean
+          cd ..
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Build APK
+        script: |
+          flutter build apk --release --verbose
+      - name: List build outputs
+        script: |
+          find build -name "*.apk"
+    artifacts:
+      - build/app/outputs/apk/release/*.apk
+      - build/app/outputs/bundle/release/*.aab
+    publishing:
+      email:
+        recipients:
+          - user@example.com 
