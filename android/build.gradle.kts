@@ -21,7 +21,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:8.1.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
     }
 }
 
@@ -29,6 +29,23 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+    }
+}
+
+// Configuration commune pour tous les sous-projets Android
+subprojects {
+    afterEvaluate {
+        if (project.plugins.hasPlugin("com.android.application") || 
+            project.plugins.hasPlugin("com.android.library")) {
+            android {
+                compileSdk = 34
+                defaultConfig {
+                    minSdk = 21
+                    targetSdk = 34
+                }
+                ndkVersion = "27.0.12077973"
+            }
+        }
     }
 }
 
@@ -42,7 +59,7 @@ rootProject.layout.buildDirectory.value(newBuildDir)
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
-    project.evaluationDependsOn(":app")   // s’assure que :app est évalué d’abord
+    project.evaluationDependsOn(":app")   // s'assure que :app est évalué d'abord
 }
 
 // Tâche clean : supprime tout le répertoire build partagé
