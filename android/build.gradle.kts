@@ -4,14 +4,21 @@
 import org.gradle.api.tasks.Delete
 import org.gradle.api.file.Directory
 
+// Variables globales (définies en haut, hors de buildscript)
+val kotlinVersion = "1.9.0"
+val compileSdkVersion = 34
+val minSdkVersion = 21
+val targetSdkVersion = 34
+val ndkVersion = "27.0.12077973"
+
 buildscript {
     // Versions communes à tout le projet
     ext {
-        kotlin_version = "1.9.0"          // gardé identique à votre config
-        compileSdkVersion = 34
-        minSdkVersion = 21
-        targetSdkVersion = 34
-        ndkVersion = "27.0.12077973"      // ✅ version NDK corrigée
+        kotlin_version = kotlinVersion
+        compileSdkVersion = compileSdkVersion
+        minSdkVersion = minSdkVersion
+        targetSdkVersion = targetSdkVersion
+        ndkVersion = ndkVersion
     }
 
     repositories {
@@ -21,7 +28,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:8.1.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
 
@@ -38,12 +45,12 @@ subprojects {
         if (project.plugins.hasPlugin("com.android.application") || 
             project.plugins.hasPlugin("com.android.library")) {
             android {
-                compileSdk = 34
+                compileSdk = compileSdkVersion
                 defaultConfig {
-                    minSdk = 21
-                    targetSdk = 34
+                    minSdk = minSdkVersion
+                    targetSdk = targetSdkVersion
                 }
-                ndkVersion = "27.0.12077973"
+                ndkVersion = ndkVersion
             }
         }
     }
