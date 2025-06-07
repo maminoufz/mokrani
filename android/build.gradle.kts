@@ -6,10 +6,10 @@ import org.gradle.api.file.Directory
 
 // Variables globales (définies en haut, hors de buildscript)
 val kotlinVersion = "1.9.0"
-val compileSdkVersion = 34
+val compileSdkVersion = 33
 val minSdkVersion = 21
-val targetSdkVersion = 34
-val ndkVersion = "27.0.12077973"
+val targetSdkVersion = 33
+val ndkVersion = "25.1.8937393"
 val gradlePluginVersion = "8.1.0"
 
 buildscript {
