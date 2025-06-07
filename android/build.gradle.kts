@@ -10,6 +10,7 @@ val compileSdkVersion = 34
 val minSdkVersion = 21
 val targetSdkVersion = 34
 val ndkVersion = "27.0.12077973"
+val gradlePluginVersion = "8.1.0"
 
 buildscript {
     // Versions communes à tout le projet
@@ -27,7 +28,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("com.android.tools.build:gradle:$gradlePluginVersion")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }

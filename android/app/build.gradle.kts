@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    kotlin("android") version "1.9.0"
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -60,6 +60,7 @@ android {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.window:window:1.0.0")
     implementation("androidx.window:window-java:1.0.0")
