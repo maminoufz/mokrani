@@ -59,7 +59,7 @@ class _HomeContentState extends State<HomeContent> {
                           CustomCarousel(
                             height: 200,
                             viewportFraction: 1.0,
-                            autoPlay: true,
+                            autoPlay: false,
                             autoPlayInterval: const Duration(seconds: 5),
                             onPageChanged: (index) {
                               setState(() {

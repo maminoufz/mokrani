@@ -10,15 +10,24 @@ workflows:
       ios_signing:
         distribution_type: ad-hoc
         bundle_identifier: com.example.app
+        team_id: YOUR_TEAM_ID # Replace with your Apple Developer Team ID
+        provisioning_profile_specifier: YOUR_PROVISIONING_PROFILE # Replace with your provisioning profile name
       xcode: latest
       cocoapods: default
+      flutter: stable
     scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
       - name: Build IPA
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --export-options-plist=ios/exportOptions.plist
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
       email:
         recipients:
-          - user@example.com 
+          - user@example.com
+      app_store_connect:
+        submit_for_review: false
+        beta_groups: [] 
