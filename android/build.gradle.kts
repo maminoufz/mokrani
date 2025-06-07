@@ -46,12 +46,12 @@ subprojects {
         if (project.plugins.hasPlugin("com.android.application") || 
             project.plugins.hasPlugin("com.android.library")) {
             android {
-                compileSdk = compileSdkVersion
+                compileSdk = rootProject.extra["compileSdkVersion"] as Int
                 defaultConfig {
-                    minSdk = minSdkVersion
-                    targetSdk = targetSdkVersion
+                    minSdk = rootProject.extra["minSdkVersion"] as Int
+                    targetSdk = rootProject.extra["targetSdkVersion"] as Int
                 }
-                ndkVersion = ndkVersion
+                ndkVersion = rootProject.extra["ndkVersion"] as String
             }
         }
     }

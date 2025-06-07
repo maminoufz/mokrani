@@ -6,13 +6,13 @@ plugins {
 
 android {
     namespace = "com.example.new_app"
-    compileSdk = compileSdkVersion
-    ndkVersion = ndkVersion
+    compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    ndkVersion = rootProject.extra["ndkVersion"] as String
 
     defaultConfig {
         applicationId = "com.example.new_app"
-        minSdk = minSdkVersion
-        targetSdk = targetSdkVersion
+        minSdk = rootProject.extra["minSdkVersion"] as Int
+        targetSdk = rootProject.extra["targetSdkVersion"] as Int
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
@@ -60,7 +60,7 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlinVersion"]}")
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.window:window:1.0.0")
     implementation("androidx.window:window-java:1.0.0")
