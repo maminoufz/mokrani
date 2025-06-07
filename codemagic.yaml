@@ -64,4 +64,30 @@ workflows:
     publishing:
       email:
         recipients:
-          - user@example.com 
+          - user@example.com
+
+  build-apk:
+    name: Build APK (Flutter + Kotlin DSL)
+    environment:
+      flutter: stable
+      xcode: none
+      android_signing:
+        keystore_reference: my-keystore
+      vars:
+        JAVA_VERSION: "17"
+        ANDROID_NDK_VERSION: "25.1.8937393"
+    scripts:
+      - name: 📦 Get Flutter packages
+        script: flutter pub get
+
+      - name: 🛠️ Clean build cache
+        script: flutter clean
+
+      - name: 📁 Make Gradle executable
+        script: chmod +x android/gradlew
+
+      - name: 🔧 Build APK in release mode
+        script: flutter build apk --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk 
